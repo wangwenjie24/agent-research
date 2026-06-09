@@ -16,7 +16,6 @@ from typing_extensions import NotRequired
 from langchain.agents import AgentState
 from sql_assistant.prompts import SKILLS_ADDENDUM_TEMPLATE
 from sql_assistant.skills import aget_skills, get_skills
-from sql_assistant.tools import execute_sql, load_skill, validate_sql
 
 
 class SkillState(AgentState):
@@ -32,7 +31,6 @@ class SkillMiddleware(AgentMiddleware):
     """
 
     state_schema = SkillState
-    tools = [load_skill, validate_sql, execute_sql]
 
     def before_agent(self, state: SkillState, runtime: Runtime) -> dict[str, Any] | None:
         """在 Agent 启动前动态加载技能列表到状态中（同步版本）。"""

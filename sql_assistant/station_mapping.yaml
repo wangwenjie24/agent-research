@@ -1,0 +1,58 @@
+# 华北分公司下属所有区域及场站映射
+# 格式：场站全称 -> 常见简称列表
+
+山东区域:
+  - full_name: 东明乾德风电场
+    short_names: [乾德风场, 乾德风电场]
+  - full_name: 东明景祐风电场
+    short_names: [景祐风场, 景祐风电场]
+  - full_name: 东明上元风电场
+    short_names: [上元风场, 上元风电场]
+  - full_name: 郯城泉源优能风电场
+    short_names: [泉源风场, 泉源风电场, 郯城风场]
+  - full_name: 山东萨瓦分布式光伏电站
+    short_names: [萨瓦光伏, 萨瓦电站]
+
+河南区域:
+  - full_name: 兰考范寨风电场
+    short_names: [范寨风场, 范寨风电场]
+  - full_name: 兰考东坝头风电场
+    short_names: [东坝头风场, 东坝头风电场]
+  - full_name: 开封万彩岭风电场
+    short_names: [万彩岭风场, 万彩岭风电场]
+  - full_name: 太康风脉风电场
+    short_names: [风脉风场, 风脉风电场, 太康风场]
+  - full_name: 柘城巴彦风电场
+    short_names: [巴彦风场, 巴彦风电场, 柘城风场]
+
+山西区域:
+  - full_name: 闻喜柏景风电场
+    short_names: [柏景风场, 柏景风电场, 闻喜风场]
+  - full_name: 山西灵丘分散式风电场
+    short_names: [灵丘风场, 灵丘风电场]
+  - full_name: 山西长治分布式光伏电站
+    short_names: [长治光伏, 长治电站]
+
+冀南区域:
+  - full_name: 临西万辉风电场
+    short_names: [万辉风场, 万辉风电场, 临西风场]
+  - full_name: 肥乡落堡风电场
+    short_names: [落堡风场, 落堡风电场, 肥乡风场]
+
+冀北区域:
+  - full_name: 张北天润邢地湾风电场
+    short_names: [邢地湾风场, 天润风场, 邢地湾风电场]
+  - full_name: 张北平价风电场
+    short_names: [平价风场, 平价风电场]
+  - full_name: 张北万邦风电场
+    short_names: [万邦风场, 万邦风电场]
+  - full_name: 河北珠江啤酒分布式光伏电站
+    short_names: [珠江啤酒光伏, 珠江啤酒电站]
+
+内蒙区域:
+  - full_name: 阿拉善佳合泉吉分散式风电场
+    short_names: [佳合泉吉风场, 佳合泉吉风电场, 阿拉善风场]
+
+陕西区域:
+  - full_name: 陕西志丹榕树岭风电场
+    short_names: [榕树岭风场, 榕树岭风电场, 志丹风场]
