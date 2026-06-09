@@ -16,6 +16,6 @@ wheels/
 .DS_Store
 
 .agents
-.claude
+.pi
 
 .langgraph_api
