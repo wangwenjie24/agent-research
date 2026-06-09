@@ -8,13 +8,8 @@ from langchain.tools import tool
 
 from sql_assistant.skills import get_skills
 
-# 禁止的 SQL 关键字（DML / DDL / 其他写操作）
-_BLOCKED_KEYWORDS = frozenset({
-    "INSERT", "UPDATE", "DELETE", "REPLACE",
-    "DROP", "ALTER", "CREATE", "TRUNCATE", "RENAME",
-    "GRANT", "REVOKE",
-    "LOAD", "CALL", "SET", "LOCK", "UNLOCK",
-})
+# 只允许的 SQL 首关键字（白名单模式，比黑名单更安全）
+_ALLOWED_KEYWORDS = frozenset({"SELECT", "WITH"})
 
 
 def _strip_comments(sql: str) -> str:
@@ -36,9 +31,9 @@ def _strip_comments(sql: str) -> str:
 
 
 def _is_read_only(sql: str) -> bool:
-    """检查 SQL 是否为只读查询。
+    """检查 SQL 是否为只读查询（白名单模式）。
 
-    反向思维：不枚举允许的写法，而是拦截所有写操作关键字。
+    只允许 SELECT 和 WITH（CTE）开头的语句，从根源杜绝写操作。
     """
     sql = _strip_comments(sql.strip().rstrip(";"))
     if not sql:
@@ -46,11 +41,11 @@ def _is_read_only(sql: str) -> bool:
     # 防注入：禁止多语句（中间含分号）
     if ";" in sql:
         return False
-    # 提取第一个关键字
+    # 提取第一个关键字，必须在白名单内
     match = re.match(r"\s*(\w+)", sql)
     if not match:
         return False
-    return match.group(1).upper() not in _BLOCKED_KEYWORDS
+    return match.group(1).upper() in _ALLOWED_KEYWORDS
 
 
 def _get_mysql_config() -> dict:
@@ -104,7 +99,8 @@ def validate_sql(sql: str) -> str:
 
     try:
         with conn.cursor() as cursor:
-            cursor.execute(f"EXPLAIN {sql}")
+            # sql 已通过白名单校验，只可能是 SELECT/WITH 语句
+            cursor.execute("EXPLAIN %s", (sql,))
             columns = [desc[0] for desc in cursor.description]
             rows = cursor.fetchall()
             result = [dict(zip(columns, row)) for row in rows]
